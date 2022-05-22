@@ -13,7 +13,7 @@ const BootScreen = ({changeScreen}) => {
     },[])
 
     const middlePar = () => {
-        if (showPar === 1 || showPar == 2) {
+        if (showPar === 1 || showPar === 2) {
             return (
                 <div className={textContainerClass}>
                         <h1 className={textClass}>Mem. Test: 16384K OK</h1>
