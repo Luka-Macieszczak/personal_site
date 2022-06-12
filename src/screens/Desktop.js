@@ -4,14 +4,20 @@ import MainHeader from '../Components/MainHeader';
 import FileComponent from '../Components/FileComponent'; 
 import DesktopShortcut from '../Components/DesktopShortcut.js';
 import resumeImage from '../assets/PierogiIcon.png';
+import DropdownMenu from '../Components/DropdownMenu.js';
 
 const Desktop = (props) => {
-    const [closeFile, setCloseFile] = useState(false);
+    const [openAboutMenu, setOpenAboutMenu] = useState(false);
+    const [openFile, setOpenFile] = useState(true);
     return (
-        <div>
-            <MainHeader />
-            {closeFile ? <div/> : <FileComponent fileContent={Constants.resume} filename="Resume.txt" closeFile={setCloseFile}/>}
-            <DesktopShortcut fileName={'Resume.txt'} handleOpen={() => setCloseFile(false)} image={resumeImage}/>
+        <div className='relative z-2'>
+            <MainHeader aboutMenuHandler={setOpenAboutMenu}/>
+
+            <DropdownMenu isAboutMenuOpen={openAboutMenu} />
+
+            <FileComponent isFileOpen={openFile} fileContent={Constants.resume} filename="Resume.txt" openFile={setOpenFile}/> 
+
+            <DesktopShortcut  fileName={'Resume.txt'} handleOpen={() => setOpenFile(true)} image={resumeImage}/>
 
         </div>
     );

@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {FaBeer} from 'react-icons/fa'
 import pierogi from '../assets/PierogiIcon.png'
 import '../App.css';
+import Config from '../Config';
 
 const monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"
@@ -33,8 +34,22 @@ const MainHeader = (props) => {
     }
 
     const [time, setTime] = useState(getTime());
+    
 
     useEffect(() => {
+
+        fetch('http://localhost:8080/', {
+            method: 'GET',
+            credentials: "same-origin",
+            mode: 'cors',
+            headers: {
+                'Access-Control-Allow-Origin':'*'
+            }
+  
+        }).then((response) => {
+            console.log(response);
+        })
+
         setInterval(() => {
             setTime(getTime());
         }, 1000);
@@ -44,7 +59,7 @@ const MainHeader = (props) => {
     return (
         <div className="bg-gray-100 flex flex-row ">
             <div className="flex flex-row p-1 w-1/2">
-                <img src={pierogi} alt='logo' className="h-8 mr-8 ml-4 hover:bg-black"/>
+                <img onClick={() => props.aboutMenuHandler(true)} src={pierogi} alt='logo' className="h-8 mr-8 ml-4 hover:bg-black"/>
                 <h1 onClick={() => props.onClickFile()} className="m-1 mx-4 hover:bg-black hover:text-white">File</h1>
                 <h1 className="m-1 mx-4 hover:bg-black hover:text-white">Edit</h1>
                 
